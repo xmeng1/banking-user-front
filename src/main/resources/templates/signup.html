@@ -48,6 +48,7 @@
                                                  aria-hidden="true"></i></span>
               <input type="text" class="form-control" th:value="${user.phone}" id="phone"
                      name="phone" roleId="phone" placeholder="xxx-xxx-xxxx" required="required"/>
+              <!--like [(ngModel)]-->
             </div>
           </div>
         </div>
@@ -55,6 +56,7 @@
         <div class="form-group">
           <label for="email" class="cols-sm-2 control-label">Your Email</label><span
             class="bg-danger pull-right" th:if="${emailExists}">Email already exists</span>
+          <!--check email exist, like ngIf-->
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-envelope fa"
