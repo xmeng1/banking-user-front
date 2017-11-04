@@ -21,10 +21,11 @@ public class PrimaryTransaction {
     private String status;
     private double amount;
     private BigDecimal availableBalance;
-    private PrimaryAccount primaryAccount;
 
     @ManyToOne
     @JoinColumn(name = "primary_account_id")
+    private PrimaryAccount primaryAccount;
+
     public PrimaryAccount getPrimaryAccount() {
         return primaryAccount;
     }
