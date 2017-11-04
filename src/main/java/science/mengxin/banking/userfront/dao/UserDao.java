@@ -14,6 +14,10 @@ import science.mengxin.banking.userfront.domain.User;
  * @version 1.0
  */
 public interface UserDao extends CrudRepository<User, Long>{
+
+    // only define the method in interface, which has default implement by the name
+    //  of method.
     User findByUsername(String username);
+
     User findByEmail(String email);
 }
