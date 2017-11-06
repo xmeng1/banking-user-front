@@ -1,7 +1,9 @@
 package science.mengxin.banking.userfront.service;
 
+import java.util.Set;
 import org.springframework.stereotype.Service;
 import science.mengxin.banking.userfront.domain.User;
+import science.mengxin.banking.userfront.domain.security.UserRole;
 
 /**
  * User:    mengxin
@@ -28,4 +30,6 @@ public interface UserService {
     boolean checkEmailExists(String email);
 
     void save (User user);
+
+    User createUser(User user, Set<UserRole> userRoles);
 }
