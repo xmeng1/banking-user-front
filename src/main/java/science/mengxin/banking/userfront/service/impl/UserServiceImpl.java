@@ -12,6 +12,7 @@ import science.mengxin.banking.userfront.dao.RoleDao;
 import science.mengxin.banking.userfront.dao.UserDao;
 import science.mengxin.banking.userfront.domain.User;
 import science.mengxin.banking.userfront.domain.security.UserRole;
+import science.mengxin.banking.userfront.service.AccountService;
 import science.mengxin.banking.userfront.service.UserService;
 
 /**
@@ -40,6 +41,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     public User findByUsername(String username) {
@@ -100,8 +104,8 @@ public class UserServiceImpl implements UserService {
 
             user.getUserRoles().addAll(userRoles);
 
-            //user.setPrimaryAccount(accountService.createPrimaryAccount());
-            //user.setSavingsAccount(accountService.createSavingsAccount());
+            user.setPrimaryAccount(accountService.createPrimaryAccount());
+            user.setSavingsAccount(accountService.createSavingsAccount());
 
             localUser = userDao.save(user);
         }

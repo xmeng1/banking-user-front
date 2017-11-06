@@ -1,12 +1,16 @@
 package science.mengxin.banking.userfront.controller;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import science.mengxin.banking.userfront.dao.RoleDao;
 import science.mengxin.banking.userfront.domain.User;
+import science.mengxin.banking.userfront.domain.security.UserRole;
 import science.mengxin.banking.userfront.service.UserService;
 
 // import science.mengxin.banking.userfront.domain.User;
@@ -27,6 +31,8 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private RoleDao roleDao;
 
 
     @RequestMapping("/")
@@ -60,7 +66,13 @@ public class HomeController {
 
             return "signup";
         } else {
-            userService.save(user);
+            // userService.save(user);
+            // user create user replace the save user directly
+
+            Set<UserRole> userRoles = new HashSet<>();
+            userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
+            userService.createUser(user, userRoles);
+
             return "redirect:/";
         }
     }
