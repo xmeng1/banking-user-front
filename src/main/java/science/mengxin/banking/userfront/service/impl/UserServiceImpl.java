@@ -1,9 +1,10 @@
-package science.mengxin.banking.userfront.service;
+package science.mengxin.banking.userfront.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import science.mengxin.banking.userfront.dao.UserDao;
 import science.mengxin.banking.userfront.domain.User;
+import science.mengxin.banking.userfront.service.UserService;
 
 /**
  * User:    mengxin
