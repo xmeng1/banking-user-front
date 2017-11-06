@@ -70,6 +70,9 @@ public class HomeController {
             // user create user replace the save user directly
 
             Set<UserRole> userRoles = new HashSet<>();
+
+            // because the role is not exist, and find will return null
+            // so add the role in the database with name ROLE_USER
             userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
             userService.createUser(user, userRoles);
 
