@@ -1,5 +1,6 @@
 package science.mengxin.banking.userfront.service;
 
+import java.security.Principal;
 import org.springframework.stereotype.Service;
 import science.mengxin.banking.userfront.domain.PrimaryAccount;
 import science.mengxin.banking.userfront.domain.SavingsAccount;
@@ -19,4 +20,6 @@ import science.mengxin.banking.userfront.domain.SavingsAccount;
 public interface AccountService {
     PrimaryAccount createPrimaryAccount();
     SavingsAccount createSavingsAccount();
+
+    void deposit(String accountType, double v, Principal principal);
 }
