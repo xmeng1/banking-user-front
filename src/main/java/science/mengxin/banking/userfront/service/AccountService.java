@@ -22,4 +22,6 @@ public interface AccountService {
     SavingsAccount createSavingsAccount();
 
     void deposit(String accountType, double v, Principal principal);
+
+    void withdraw(String accountType, double amount, Principal principal);
 }
