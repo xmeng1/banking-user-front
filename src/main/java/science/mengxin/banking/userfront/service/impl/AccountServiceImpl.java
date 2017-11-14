@@ -13,6 +13,7 @@ import science.mengxin.banking.userfront.domain.SavingsAccount;
 import science.mengxin.banking.userfront.domain.SavingsTransaction;
 import science.mengxin.banking.userfront.domain.User;
 import science.mengxin.banking.userfront.service.AccountService;
+import science.mengxin.banking.userfront.service.TransactionService;
 import science.mengxin.banking.userfront.service.UserService;
 
 /**
@@ -38,6 +39,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @Override
     public PrimaryAccount createPrimaryAccount() {
@@ -73,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
 
             PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Deposit to Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-            // transactionService.savePrimaryDepositTransaction(primaryTransaction);
+            transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -82,7 +86,7 @@ public class AccountServiceImpl implements AccountService {
 
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Deposit to savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-            // transactionService.saveSavingsDepositTransaction(savingsTransaction);
+            transactionService.saveSavingsDepositTransaction(savingsTransaction);
         }
     }
 
