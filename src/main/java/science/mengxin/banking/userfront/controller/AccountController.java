@@ -1,6 +1,7 @@
 package science.mengxin.banking.userfront.controller;
 
 import java.security.Principal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import science.mengxin.banking.userfront.domain.PrimaryAccount;
+import science.mengxin.banking.userfront.domain.PrimaryTransaction;
 import science.mengxin.banking.userfront.domain.SavingsAccount;
+import science.mengxin.banking.userfront.domain.SavingsTransaction;
 import science.mengxin.banking.userfront.domain.User;
 import science.mengxin.banking.userfront.service.AccountService;
+import science.mengxin.banking.userfront.service.TransactionService;
 import science.mengxin.banking.userfront.service.UserService;
 
 /**
@@ -35,12 +39,17 @@ public class AccountController {
     private AccountService accountService;
 
 
+    @Autowired
+    private TransactionService transactionService;
+
     @RequestMapping("/primaryAccount")
     public String primaryAccount(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
+        List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
 
         model.addAttribute("primaryAccount", primaryAccount);
+        model.addAttribute("primaryTransactionList", primaryTransactionList);
         return "primaryAccount";
     }
 
@@ -48,8 +57,10 @@ public class AccountController {
     public String savingsAccount(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         SavingsAccount savingsAccount = user.getSavingsAccount();
+        List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
 
         model.addAttribute("savingsAccount", savingsAccount);
+        model.addAttribute("savingsTransactionList", savingsTransactionList);
         return "savingsAccount";
     }
 
